@@ -1,5 +1,7 @@
 package me.ppgome.smpitems;
 
+import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,8 +18,14 @@ public final class SMPItems extends JavaPlugin {
     private File basicitems;
 
     @Override
+    public void onLoad() {
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).verboseOutput(true));
+    }
+
+    @Override
     public void onEnable() {
         // Plugin startup logic
+        CommandAPI.onEnable();
         System.out.println("Plugin loaded successfully. Checking/generating config files...");
 
         itemsdir = new File("items");
@@ -40,6 +48,7 @@ public final class SMPItems extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        CommandAPI.onDisable();
     }
 
     public void generateConfigs(String filename) {
