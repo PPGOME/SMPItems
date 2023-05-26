@@ -1,4 +1,4 @@
-package me.ppgome.smpitems;
+package me.ppgome.smpitems.items;
 
 import org.bukkit.Material;
 
