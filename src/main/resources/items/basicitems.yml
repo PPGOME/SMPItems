@@ -1,0 +1,18 @@
+# The file for basic items such as mob drops, ingots and other miscellaneous items.
+
+basicitems:
+  # Item identifier
+  jubarium:
+    # Item name in-game
+    name: "<red>Jubarium</red>"
+    # Custom model ID for textures
+    model: 1
+    # Item material (use PAPER unless you know what you're doing by using other materials)
+    material: PAPER
+    # The lore of the item
+    lore: "<blue>The ore from the heavens</blue>"
+    # Any attributes you wish the item to apply to the user when held or worn
+    attributes:
+        - {attribute: attack_damage, level: 30}
+        - {attribute: attack_speed, level: 10}
+test: test
