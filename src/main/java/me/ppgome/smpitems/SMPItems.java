@@ -2,6 +2,7 @@ package me.ppgome.smpitems;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import me.ppgome.smpitems.commands.GetItem;
 import me.ppgome.smpitems.datamanager.JSONReader;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,6 +54,8 @@ public final class SMPItems extends JavaPlugin {
         }
 
         JSONReader.createBasicItems();
+
+        GetItem.getItemCommand();
 
     }
 

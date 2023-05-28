@@ -31,7 +31,7 @@ public class JSONReader {
                 }
 
             }
-
+            System.out.println(s);
             itemList.put(s, new BasicItem(getStringValue("basicitems." + s + ".name"), Integer.parseInt(Objects.
                     requireNonNull(getStringValue("basicitems." + s + ".model"))), Material.matchMaterial(String.
                     valueOf(getStringValue("basicitems." + s + ".material"))), getStringValue("basicitems." +
