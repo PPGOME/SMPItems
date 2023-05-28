@@ -1,5 +1,5 @@
 # SMPItems
- [![CodeFactor](https://www.codefactor.io/repository/github/ppgome/smpitems/badge)](https://www.codefactor.io/repository/github/ppgome/smpitems)
+ Stable: [![CodeFactor](https://www.codefactor.io/repository/github/ppgome/smpitems/badge)](https://www.codefactor.io/repository/github/ppgome/smpitems) Development: [![CodeFactor](https://www.codefactor.io/repository/github/ppgome/smpitems/badge/development)](https://www.codefactor.io/repository/github/ppgome/smpitems/overview/development)
 ## What does it do?
 SMPItems is a plugin for creating custom items with a main focus on custom textures. Written using YML files, you can create an item and change every aspect of it.
 
