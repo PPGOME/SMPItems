@@ -1,5 +1,7 @@
 # The file for basic items such as mob drops, ingots and other miscellaneous items.
 
+# Confused? See the github wiki for examples.
+
 basicitems:
   # Item identifier
   jubarium:
@@ -13,6 +15,5 @@ basicitems:
     lore: "<blue>The ore from the heavens</blue>"
     # Any attributes you wish the item to apply to the user when held or worn
     attributes:
-        - {attribute: attack_damage, level: 30}
-        - {attribute: attack_speed, level: 10}
-test: test
+      attack_damage: 30
+      attack_speed: 10

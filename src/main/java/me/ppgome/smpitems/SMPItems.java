@@ -52,10 +52,6 @@ public final class SMPItems extends JavaPlugin {
             saveResource("items/basicitems.yml", false);
         }
 
-        System.out.println(basicitems.getAbsolutePath());
-        System.out.println(getDataFolder().getAbsolutePath());
-        System.out.println(getDataFolder().getAbsolutePath() + "\\items");
-
         JSONReader.createBasicItems();
 
     }

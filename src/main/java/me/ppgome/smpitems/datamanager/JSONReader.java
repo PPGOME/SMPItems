@@ -13,8 +13,8 @@ public class JSONReader {
 
     private static File basicitems;
     private static YamlConfiguration basicyml;
-    private static List<String> basicitemlist;
-    private static ArrayList<String> itemList = new ArrayList<>();
+    private static HashMap<String, Integer> basicitemmap;
+    private static HashMap<String, BasicItem> itemList = new HashMap<>();
 
     public static void createBasicItems() {
         basicitems = new File(SMPItems.getPlugin().getDataFolder().getAbsolutePath() + "\\items", "basicitems.yml");
@@ -22,20 +22,20 @@ public class JSONReader {
         basicyml = YamlConfiguration.loadConfiguration(basicitems);
 
         for(String s: basicyml.getConfigurationSection("basicitems").getKeys(false)) {
-            //TODO: Figure out this array stuff. Idk how this works :(
             if(basicyml.get("basicitems." + s + ".attributes") != null) {
-                System.out.println("NOT NULL!");
-                System.out.println(basicyml.get("basicitems." + s + ".attributes"));
+
+                basicitemmap = new HashMap<>();
+
+                for(String attribute : basicyml.getConfigurationSection("basicitems." + s + ".attributes").getKeys(false)) {
+                    basicitemmap.put(attribute, basicyml.getInt("basicitems." + s + ".attributes." + attribute));
+                }
+
             }
 
-            basicitemlist = basicyml.getStringList("basicitems." + s + ".attributes");
-            ArrayList<String> test = new ArrayList<>(basicitemlist);
-            System.out.println(test.size());
-
-//            itemList.add(new BasicItem(getStringValue("basicitems." + s + ".name"), Integer.parseInt(Objects.
-//                    requireNonNull(getStringValue("basicitems." + s + ".model"))), Material.matchMaterial(String.
-//                    valueOf(getStringValue("basicitems." + s + ".material"))), getStringValue("basicitems." +
-//                    s + ".lore"), ));
+            itemList.put(s, new BasicItem(getStringValue("basicitems." + s + ".name"), Integer.parseInt(Objects.
+                    requireNonNull(getStringValue("basicitems." + s + ".model"))), Material.matchMaterial(String.
+                    valueOf(getStringValue("basicitems." + s + ".material"))), getStringValue("basicitems." +
+                    s + ".lore"), basicitemmap));
         }
     }
 
@@ -44,9 +44,8 @@ public class JSONReader {
         return String.valueOf(basicyml.get(path));
     }
 
-    private static @NotNull List<Map<?, ?>> getAttributes(String path) {
-        if(basicyml.get(path) == null) return null;
-        return basicyml.getMapList(path);
+    public static HashMap<String, BasicItem> getBasicItemsList() {
+        return itemList;
     }
 
 }
