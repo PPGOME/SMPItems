@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import me.ppgome.smpitems.commands.GetItem;
 import me.ppgome.smpitems.datamanager.JSONReader;
+import me.ppgome.smpitems.items.BasicBlock;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -53,6 +54,8 @@ public final class SMPItems extends JavaPlugin {
             saveResource("items/basicitems.yml", false);
         }
 
+        getServer().getPluginManager().registerEvents(new BasicBlock(), this);
+
         JSONReader.createBasicItems();
 
         GetItem.getItemCommand();
@@ -69,8 +72,6 @@ public final class SMPItems extends JavaPlugin {
      * Method for sending an instance of the plugin around.
      * @return an instance of the plugin.
      */
-    public static SMPItems getPlugin() {
-        return plugin;
-    }
+    public static SMPItems getPlugin() { return plugin; }
 
 }
