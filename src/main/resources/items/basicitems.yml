@@ -15,5 +15,10 @@ basicitems:
     lore: "<blue>The ore from the heavens</blue>"
     # Any attributes you wish the item to apply to the user when held or worn
     attributes:
-      attack_damage: 30
-      attack_speed: 10
+      # The name of the attribute (See github wiki for all accepted attributes)
+      GENERIC_ATTACK_DAMAGE:
+      # The modifier level (plugin uses the add operator for attributes)
+      level: 10
+      # The in-plugin ID of the attribute. DO NOT TOUCH, DO NOT MANUALLY ADD. The plugin will generate it by itself
+      # and the items will only stack if this remains as is when generated.
+      attributeid: 2a43dbfb-a4e7-404a-86b0-bf59e1060c0a

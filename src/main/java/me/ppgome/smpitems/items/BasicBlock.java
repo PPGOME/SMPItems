@@ -31,7 +31,14 @@ public class BasicBlock implements Listener {
         }
     }
 
-    @EventHandler void onNotePlay(NotePlayEvent e) {
+    @EventHandler
+    public static void onNotePlay(NotePlayEvent e) {
+        System.out.println(e.getInstrument());
+
+        if(e.getInstrument() == Instrument.CUSTOM_HEAD) {
+
+        }
+
         if(e.getInstrument().equals(Instrument.STICKS)) {
             e.setCancelled(true);
             e.setNote(e.getNote());

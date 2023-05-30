@@ -3,6 +3,8 @@ package me.ppgome.smpitems.datamanager;
 import me.ppgome.smpitems.SMPItems;
 import me.ppgome.smpitems.items.BasicItem;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -28,13 +30,13 @@ public class JSONReader {
 
         basicyml = YamlConfiguration.loadConfiguration(basicitems);
 
-        for(String s: basicyml.getConfigurationSection("basicitems").getKeys(false)) {
-            if(basicyml.get("basicitems." + s + ".attributes") != null) {
+        for (String s : basicyml.getConfigurationSection("basicitems").getKeys(false)) {
+            if (basicyml.get("basicitems." + s + ".attributes") != null) {
 
                 basicitemmap = new HashMap<>();
 
-                for(String attribute : basicyml.getConfigurationSection("basicitems." + s + ".attributes").getKeys(false)) {
-                    basicitemmap.put(attribute, basicyml.getDouble("basicitems." + s + ".attributes." + attribute));
+                for (String attribute : basicyml.getConfigurationSection("basicitems." + s + ".attributes").getKeys(false)) {
+                    basicitemmap.put(attribute, basicyml.getDouble("basicitems." + s + ".attributes." + attribute + ".level"));
                 }
 
             }
@@ -47,7 +49,7 @@ public class JSONReader {
     }
 
     private static String getStringValue(String path) {
-        if(basicyml.get(path) == null) return null;
+        if (basicyml.get(path) == null) return null;
         return String.valueOf(basicyml.get(path));
     }
 
@@ -55,34 +57,24 @@ public class JSONReader {
         return itemList;
     }
 
-    public static void setUUID(String name, UUID uuid) {
+    public static void setUUID(String name, String attribute, UUID uuid) {
         basicitems = new File(SMPItems.getPlugin().getDataFolder().getAbsolutePath() + "\\items", "basicitems.yml");
         basicyml = YamlConfiguration.loadConfiguration(basicitems);
-
-        for(String s: basicyml.getConfigurationSection("basicitems").getKeys(false)) {
-            if(s.equals(name)) {
-                basicyml.set("basicitems." + s + ".itemid", uuid);
-                try {
-                    basicyml.save(basicitems);
-                } catch(IOException e) {
-                    System.out.println("Could not save UUID to file!");
-                }
+        if(basicyml.get("basicitems." + name + ".attributes." + attribute + ".attributeid") == null) {
+            basicyml.set("basicitems." + name + ".attributes." + attribute + ".attributeid", String.valueOf(uuid));
+            try {
+                basicyml.save(basicitems);
+            } catch (IOException e) {
+                System.out.println("Could not save UUID to file!");
             }
         }
-
     }
-    public static UUID getUUID(String name) {
+
+    public static String getUUID(String name, String attributename) {
         basicitems = new File(SMPItems.getPlugin().getDataFolder().getAbsolutePath() + "\\items", "basicitems.yml");
         basicyml = YamlConfiguration.loadConfiguration(basicitems);
 
-        for(String s: Objects.requireNonNull(basicyml.getConfigurationSection("basicitems")).getKeys(false)) {
-            if(s.equals(name)) {
-                return UUID.fromString(String.valueOf(basicyml.get("basicitems." + name + ".itemid")));
-            } else {
-                return null;
-            }
-        }
-        return null;
+        return String.valueOf(basicyml.get("basicitems." + name + ".attributes." + attributename + ".attributeid"));
     }
 
     public static void isitnull() {
@@ -93,7 +85,7 @@ public class JSONReader {
 
     public static String translateAttribute(String attribute) {
 
-        switch(attribute) {
+        switch (attribute) {
             case "GENERIC_ARMOR":
                 return "Armor";
             case "GENERIC_ARMOR_TOUGHNESS":
